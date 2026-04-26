@@ -13,8 +13,8 @@
 # 起動時間（再起動済みか）
 last reboot | head -1
 
-# クロコのインストール状況＋バージョン
-ls -ld /Applications/Claude.app 2>/dev/null && defaults read /Applications/Claude.app/Contents/Info.plist CFBundleShortVersionString || echo "❌ 未インストール"
+# クロコのバージョン確認（エラーなら未インストール）
+defaults read /Applications/Claude.app/Contents/Info.plist CFBundleShortVersionString
 
 # OSバージョン
 sw_vers -productVersion
