@@ -320,112 +320,49 @@ let selectedOS = null;
 
 const STEPS = [
   {
-    num: 0,
-    title: "事前チェック（準備）",
-    items: [
-      { id: "s0_net",     text: "インターネットに接続されている" },
-      { id: "s0_charge",  text: "PCの充電が十分ある（またはACアダプタを接続した）" },
-      { id: "s0_storage", text: "ストレージの空き容量が 5GB以上 ある" },
-      { id: "s0_osver",   text: "OSのバージョンを確認した", note: "Mac：Apple メニュー→「このMacについて」/ Win：設定→システム→バージョン情報" },
-      { id: "s0_chip",    text: "Apple Silicon（M1〜M4）か Intel か確認した", osOnly: "mac" },
-    ]
-  },
-  {
     num: 1,
     title: "スクリーンショットの練習",
     items: [
-      { id: "s1_mac_full",  text: "全画面撮影できた（Command + Shift + 3）", osOnly: "mac" },
-      { id: "s1_mac_area",  text: "範囲選択撮影できた（Command + Shift + 4）", osOnly: "mac" },
-      { id: "s1_mac_save",  text: "撮影した画像がデスクトップに保存されているのを確認した", osOnly: "mac" },
-      { id: "s1_win_full",  text: "全画面撮影できた（PrintScreen または Fn + PrintScreen）", osOnly: "windows" },
-      { id: "s1_win_snip",  text: "スニッピングツールが開いた（Windows + Shift + S）", osOnly: "windows" },
-      { id: "s1_win_save",  text: "撮影した画像をペイント等に貼り付けて確認できた", osOnly: "windows" },
+      { id: "s1_mac_area", text: "範囲選択で撮影できた（Command + Shift + 4）", osOnly: "mac" },
+      { id: "s1_win_snip", text: "スニッピングツールが開いた（Windows + Shift + S）", osOnly: "windows" },
+      { id: "s1_paste",    text: "撮影した画像をクロコのチャット欄に貼り付けできた" },
     ],
     alert: "スクリーンショットは困ったときの命綱です。スタッフに声をかけて一緒に練習しましょう。"
-  },
-  {
-    num: 2,
-    title: "黒い画面を開く",
-    items: [
-      { id: "s2_mac_spot",   text: "Command + Space を押して Spotlight を開いた", osOnly: "mac" },
-      { id: "s2_mac_term",   text: "「ターミナル」と入力して Enter を押した", osOnly: "mac" },
-      { id: "s2_mac_open",   text: "黒い画面が開いて文字が入力できる状態になった", osOnly: "mac" },
-      { id: "s2_win_right",  text: "スタートボタンを右クリックした", osOnly: "windows" },
-      { id: "s2_win_ps",     text: "「Windows PowerShell」または「ターミナル」を開いた", osOnly: "windows" },
-      { id: "s2_win_open",   text: "青い画面が開いて文字が入力できる状態になった", osOnly: "windows" },
-    ],
-    alert: "ターミナル・PowerShellが開けない場合はスタッフに声をかけてください。"
   },
   {
     num: 3,
     title: "Git のインストール",
     items: [
-      { id: "s3_check",   text: "git --version コマンドを実行した", note: "バージョン番号が出ればインストール済みでOK" },
-      { id: "s3_ok",      text: "バージョン番号が表示された（git version 2.xx.x）" },
-      { id: "s3_mac_brew",text: "（インストールが必要な場合）Homebrew でインストールした", osOnly: "mac", note: "brew install git を実行" },
-      { id: "s3_win_dl",  text: "（インストールが必要な場合）git-scm.com からインストールした", osOnly: "windows", note: "PowerShellを閉じて開き直してから git --version で確認" },
+      { id: "s3_ver", text: "git --version を実行してバージョン番号が表示された", note: "例：git version 2.xx.x　／　エラーが出た場合はスタッフへ" },
     ],
     alert: "エラーが出た場合はスタッフに声をかけてください。インストールをサポートします。"
-  },
-  {
-    num: 4,
-    title: "クロコ本体のダウンロード",
-    items: [
-      { id: "s4_site",    text: "claude.ai/download にアクセスした" },
-      { id: "s4_os",      text: "自分のOSに合ったインストーラーを選んだ", note: "Mac(Apple Silicon) / Mac(Intel) / Windows のどれか" },
-      { id: "s4_done",    text: "ダウンロードが完了した（ファイルがダウンロードフォルダにある）" },
-    ],
-    alert: "どれを選べばよいかわからない場合はスタッフに確認してください。"
   },
   {
     num: 5,
     title: "クロコのインストールと起動",
     items: [
-      { id: "s5_mac_dmg",    text: ".dmg ファイルをダブルクリックした", osOnly: "mac" },
-      { id: "s5_mac_app",    text: "アプリをアプリケーションフォルダにドラッグした", osOnly: "mac" },
-      { id: "s5_mac_launch", text: "アプリケーションフォルダから「Claude」を起動した", osOnly: "mac" },
-      { id: "s5_win_exe",    text: ".exe ファイルをダブルクリックしてインストールした", osOnly: "windows" },
-      { id: "s5_win_uac",    text: "「このアプリがデバイスに変更を加えることを許可しますか？」→「はい」を押した", osOnly: "windows" },
-      { id: "s5_win_start",  text: "スタートメニューに「Claude」が追加された", osOnly: "windows" },
-      { id: "s5_login",      text: "Anthropic アカウントでログインした（アカウントがない場合は新規作成）" },
-      { id: "s5_home",       text: "ホーム画面が表示された" },
-      { id: "s5_shortcut",   text: "デスクトップにショートカット（エイリアス）を作成した", note: "Mac：右クリック→エイリアスを作成 / Win：右クリック→ショートカットの作成" },
+      { id: "s5_mac_launch", text: "アプリケーションフォルダから「Claude」を起動できた", osOnly: "mac" },
+      { id: "s5_win_start",  text: "スタートメニューに「Claude」が追加されて起動できた", osOnly: "windows" },
     ],
-    alert: "起動できない・ログインできない場合はスタッフに声をかけてください。"
-  },
-  {
-    num: 6,
-    title: "ショートカットと動作確認",
-    items: [
-      { id: "s6_hello",  text: "クロコに「こんにちは」と話しかけて返事が来た" },
-      { id: "s6_chat",   text: "チャットモード（通常の会話）が使えることを確認した" },
-      { id: "s6_agent",  text: "エージェントモードに切り替えた", note: "入力欄の左にあるモード切り替えボタン" },
-      { id: "s6_test",   text: "エージェントモードで簡単な作業を試した", note: "例：「デスクトップにtest.txtを作って」" },
-      { id: "s6_win_sec",text: "（Windowsのみ）ウイルス対策ソフトのブロックがないか確認した", osOnly: "windows" },
-    ],
-    alert: "返事が来ない・エージェントモードに切り替えられない場合はスタッフに声をかけてください。"
+    alert: "起動できない場合はスタッフに声をかけてください。"
   },
   {
     num: 7,
     title: "後片付け（重要！）",
     items: [
-      { id: "s7_dl",      text: "ダウンロードフォルダを開いた" },
-      { id: "s7_mac_del", text: "Claude の .dmg ファイルを削除した（ゴミ箱へ）", osOnly: "mac" },
-      { id: "s7_mac_eject",text: "デスクトップの .dmg ディスクアイコンを取り出した", osOnly: "mac", note: "右クリック → 取り出す" },
-      { id: "s7_win_del", text: "Claude の .exe ファイルを削除した（ゴミ箱へ）", osOnly: "windows" },
-      { id: "s7_win_git", text: "Git のインストーラーも削除した（Windowsのみ・入れた場合）", osOnly: "windows" },
-      { id: "s7_trash",   text: "ゴミ箱を空にした" },
-    ]
+      { id: "s7_mac_del",   text: "Claude の .dmg ファイルを削除した（ゴミ箱へ）", osOnly: "mac" },
+      { id: "s7_mac_eject", text: "デスクトップの .dmg ディスクアイコンを取り出した", osOnly: "mac", note: "右クリック → 取り出す" },
+      { id: "s7_win_del",   text: "Claude の .exe ファイルを削除した（ゴミ箱へ）", osOnly: "windows" },
+    ],
   },
   {
     num: 8,
     title: "コストと制限の理解",
     items: [
-      { id: "s8_plan",  text: "クロコの利用プランを確認した", note: "無料：1日の上限あり / Pro（$20/月）：より多く使える" },
-      { id: "s8_usage", text: "今日の残り使用量を確認する方法を覚えた", note: "画面左下などに表示" },
-      { id: "s8_save",  text: "節約術を覚えた", note: "長い会話は新しいチャットを始める・不要なファイルを読み込ませない" },
-      { id: "s8_agent_cost", text: "エージェントモードはチャットモードより消費が多いことを把握した" },
-      { id: "s8_charge",text: "公式サイト（claude.ai）からプラン変更できることを確認した" },
+      { id: "s8_plan",    text: "クロコの利用プランを確認した", note: "無料：1日の上限あり / Pro（$20/月）：より多く使える" },
+      { id: "s8_usage",   text: "今日の残り使用量を確認する方法を覚えた" },
+      { id: "s8_save",    text: "節約術を覚えた", note: "長い会話は新しいチャットを始める・不要なファイルを読み込ませない" },
+      { id: "s8_gakucho", text: "学長のセキュリティのおまじないをやった" },
     ]
   },
 ];
