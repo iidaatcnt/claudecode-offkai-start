@@ -425,13 +425,57 @@ const STEPS = [
     ]
   },
   {
-    num: 9,
-    title: "おまけ：Claude in Chrome",
+    num: "おまけ１",
+    title: "学長マガジンのセキュリティのおまじない",
     tag: "おまけ",
     optional: true,
     items: [
-      { id: "s9_chrome", text: "Chrome ウェブストアから「Claude」拡張機能をインストールした", note: "Chromeユーザーのみ。検索欄で「Claude」と検索してインストール" },
-      { id: "s9_login",  text: "Anthropicアカウントでログインして使える状態になった", note: "Chromeユーザーのみ" },
+      { id: "ex1_prompt", text: "学長マガジンのプロンプトをコピペしてクロコに送った", note: "Codeで新規セッションを開いてから実施。プロンプトは長いので全部コピーできたか確認" },
+      { id: "ex1_mac",    text: "ターミナルで cat ~/.claude/CLAUDE.md を実行して内容が表示された", osOnly: "mac" },
+      { id: "ex1_win",    text: "PowerShellで cat ~/.claude/CLAUDE.md を実行して内容が表示された", osOnly: "windows" },
+    ]
+  },
+  {
+    num: "おまけ２",
+    title: "Claude in Chrome の導入",
+    tag: "おまけ",
+    optional: true,
+    items: [
+      { id: "ex2_install", text: "クロコのユーザー名をクリック→「アプリと拡張機能を入手」からインストールした", note: "クロコ起動 → ユーザー名クリック → アプリと拡張機能を入手 → Claude（インストール）→ 拡張機能を追加" },
+      { id: "ex2_pin",     text: "Chrome上部のツールバーにピン留めした" },
+    ]
+  },
+  {
+    num: "おまけ３",
+    title: "Proプランのリセット時間を活かす",
+    tag: "おまけ",
+    optional: true,
+    items: [
+      { id: "ex3_timer", text: "朝6時にClaudeにメッセージを送った（タイマースタート）", note: "5時間サイクルで使用量リセット。オフ会開始(10時)の4時間前=6時に送ると、途中切れても11時にリセットされる" },
+    ]
+  },
+  {
+    num: "おまけ４",
+    title: "Git で履歴を記録し GitHub で管理する",
+    tag: "おまけ",
+    optional: true,
+    items: [
+      { id: "ex4_account", text: "GitHub のアカウントを作った" },
+      { id: "ex4_repo",    text: "試しにリポジトリを作った" },
+      { id: "ex4_claude",  text: "クロコと連携した" },
+      { id: "ex4_push",    text: "commit（ファイルの確定）・Push（GitHubに送る）ができた" },
+    ]
+  },
+  {
+    num: "おまけ５",
+    title: "クロコで作ったWebアプリをネットに公開する",
+    tag: "おまけ",
+    optional: true,
+    items: [
+      { id: "ex5_vercel",  text: "Vercel のアカウントを作った" },
+      { id: "ex5_link",    text: "GitHub と Vercel を連携させた" },
+      { id: "ex5_deploy",  text: "GitHub から Vercel にデプロイしてWebアプリを公開した" },
+      { id: "ex5_skills",  text: "カスタムSkillsを追加してみた", note: "オフ会質問支援スキル→ github.com/iidaatcnt/offkai-helper　からどうぞ" },
     ]
   },
 ];
@@ -473,7 +517,7 @@ function renderSteps() {
     const hdr = document.createElement("div");
     hdr.className = "step-group-header";
     hdr.innerHTML = `
-      <span class="step-group-title">ステップ ${step.num}｜${step.title}</span>
+      <span class="step-group-title">${step.optional ? step.num : 'ステップ ' + step.num}｜${step.title}</span>
     `;
     group.appendChild(hdr);
 
