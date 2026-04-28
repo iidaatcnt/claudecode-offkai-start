@@ -420,7 +420,7 @@ const STEPS = [
     items: [
       { id: "s8_plan",    text: "クロコの利用プランを確認した", note: "無料：1日の上限あり / Pro（$22/月）：より多く使える" },
       { id: "s8_usage",   text: "今日の残り使用量を確認する方法を覚えた" },
-      { id: "s8_save",    text: "節約術を覚えた", note: "長い会話は新しいチャットを始める・不要なファイルを読み込ませない" },
+      { id: "s8_save",    text: "節約術を覚えた", note: "Opus・Sonnet・Haikuのコストの違いを知り、5時間でリセットされる仕組みを活かす" },
       { id: "s8_gakucho", text: "学長のセキュリティのおまじないをやった" },
     ]
   },
@@ -474,7 +474,6 @@ function renderSteps() {
     hdr.className = "step-group-header";
     hdr.innerHTML = `
       <span class="step-group-title">ステップ ${step.num}｜${step.title}</span>
-      <span class="step-group-badge">${done}/${items.length}</span>
     `;
     group.appendChild(hdr);
 
