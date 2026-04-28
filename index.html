@@ -9,273 +9,304 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", sans-serif;
-      background: #f5f0eb;
-      color: #333;
+      background: #f5e8cc;
+      color: #3a2a1a;
       min-height: 100vh;
     }
 
+    /* ヘッダー */
     header {
-      background: #8b4513;
+      background: #7a5020;
       color: white;
-      padding: 20px 16px 14px;
+      padding: 18px 16px 12px;
       text-align: center;
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     }
-    header h1 { font-size: 1.3rem; margin-bottom: 4px; }
-    header p { font-size: 0.8rem; opacity: 0.85; }
+    header h1 { font-size: 1.25rem; font-weight: bold; margin-bottom: 4px; }
+    header p  { font-size: 0.78rem; opacity: 0.85; }
 
-    /* 進捗バー */
     .progress-wrap {
-      background: rgba(255,255,255,0.25);
-      height: 6px;
+      background: rgba(255,255,255,0.3);
+      height: 5px;
       margin-top: 10px;
       border-radius: 3px;
       overflow: hidden;
     }
     .progress-fill {
       height: 100%;
-      background: #ffd700;
+      background: #f5c842;
       border-radius: 3px;
       transition: width 0.4s ease;
+      width: 0%;
     }
     .progress-text {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       opacity: 0.9;
       margin-top: 4px;
       text-align: right;
     }
 
-    /* ステップナビ */
-    .step-nav {
-      display: flex;
-      gap: 6px;
-      padding: 10px 16px;
-      overflow-x: auto;
-      background: #e8e0d8;
-      -webkit-overflow-scrolling: touch;
-    }
-    .step-nav::-webkit-scrollbar { display: none; }
-    .step-dot {
-      flex-shrink: 0;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      font-weight: bold;
-      cursor: pointer;
-      border: 2px solid #c0b8b0;
-      background: white;
-      color: #999;
-      transition: all 0.2s;
-    }
-    .step-dot.done { background: #4caf50; border-color: #4caf50; color: white; }
-    .step-dot.partial { background: #ff9800; border-color: #ff9800; color: white; }
-    .step-dot.active { border-color: #8b4513; color: #8b4513; font-weight: bold; }
-
     /* OS選択 */
-    .os-card {
-      background: white;
-      margin: 12px 16px;
-      border-radius: 12px;
-      padding: 16px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    .os-section {
+      background: #fdf5e4;
+      border-bottom: 1px solid #e0c898;
+      padding: 14px 16px;
     }
-    .os-label { font-size: 0.75rem; color: #888; margin-bottom: 6px; }
-    .os-title { font-weight: bold; margin-bottom: 12px; font-size: 1rem; }
+    .os-label { font-size: 0.72rem; color: #8a6a30; font-weight: bold; margin-bottom: 8px; letter-spacing: 0.05em; }
     .os-btn-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .os-btn {
-      padding: 12px;
-      border: 2px solid #d4c9bc;
-      border-radius: 10px;
-      background: #ede8e2;
+      padding: 11px 8px;
+      border: 2px solid #c8aa78;
+      border-radius: 8px;
+      background: white;
       font-size: 0.95rem;
       font-weight: bold;
       cursor: pointer;
+      color: #5a4020;
       transition: all 0.15s;
-      color: #555;
     }
-    .os-btn.selected { background: #e8f5e9; border-color: #4caf50; color: #2e7d32; }
+    .os-btn:hover { background: #fdf0d5; }
+    .os-btn.selected {
+      background: #1a6fc4;
+      border-color: #1a6fc4;
+      color: white;
+    }
 
-    /* ステップカード */
-    .step-card {
-      background: white;
-      margin: 10px 16px;
-      border-radius: 12px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-      overflow: hidden;
-    }
-    .step-header {
+    /* 進捗サマリ */
+    .progress-summary {
+      padding: 10px 16px;
+      font-size: 0.8rem;
+      color: #7a5020;
       display: flex;
       align-items: center;
-      padding: 14px 16px;
-      cursor: pointer;
-      user-select: none;
-      gap: 10px;
+      justify-content: space-between;
+      border-bottom: 1px solid #e0c898;
+      background: #fdf5e4;
     }
-    .step-badge {
-      flex-shrink: 0;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
+    .filter-label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+    .filter-label input { accent-color: #1a6fc4; width: 15px; height: 15px; cursor: pointer; }
+    .remain-badge {
       font-weight: bold;
-      background: #ede8e2;
-      color: #999;
-      border: 2px solid #d4c9bc;
+      background: #e8a020;
+      color: white;
+      border-radius: 10px;
+      padding: 2px 10px;
+      font-size: 0.78rem;
     }
-    .step-badge.done { background: #4caf50; border-color: #4caf50; color: white; }
-    .step-badge.partial { background: #ff9800; border-color: #ff9800; color: white; }
 
-    .step-info { flex: 1; }
-    .step-num { font-size: 0.72rem; color: #888; }
-    .step-title { font-weight: bold; font-size: 0.95rem; }
-    .step-progress { font-size: 0.75rem; color: #aaa; margin-top: 2px; }
-    .step-progress.done { color: #4caf50; }
-    .step-progress.partial { color: #ff9800; }
-
-    .step-arrow {
-      font-size: 0.9rem;
-      color: #aaa;
-      transition: transform 0.2s;
+    /* ステップグループ */
+    .step-group {
+      margin: 10px 12px 0;
     }
-    .step-arrow.open { transform: rotate(180deg); }
-
-    .step-body {
-      border-top: 1px solid #f0ebe5;
-      padding: 14px 16px;
-      display: none;
-    }
-    .step-body.open { display: block; }
-
-    /* チェックアイテム */
-    .check-item {
+    .step-group-header {
       display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 8px 0;
-      border-bottom: 1px solid #f5f0eb;
-      cursor: pointer;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 4px 4px;
     }
-    .check-item:last-child { border-bottom: none; }
-    .check-item:hover { background: #faf7f4; margin: 0 -16px; padding-left: 16px; padding-right: 16px; }
+    .step-group-title {
+      font-size: 0.72rem;
+      font-weight: bold;
+      color: #8a6030;
+      letter-spacing: 0.06em;
+    }
+    .step-group-badge {
+      font-size: 0.7rem;
+      color: #aaa;
+    }
 
-    .check-box {
+    /* チェック行 */
+    .check-row {
+      display: flex;
+      align-items: stretch;
+      background: #fdf5e4;
+      border: 1px solid #e0c898;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+    .check-row:hover { background: #fef8ed; }
+    .check-row.done { background: #fdf5e4; }
+
+    /* 左帯 */
+    .row-accent {
+      width: 36px;
       flex-shrink: 0;
-      width: 22px;
-      height: 22px;
+      background: #7a5020;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 0;
+      gap: 3px;
+    }
+    .accent-text {
+      color: white;
+      font-size: 0.58rem;
+      font-weight: bold;
+      writing-mode: vertical-rl;
+      letter-spacing: 0.1em;
+    }
+
+    /* チェックボックス */
+    .row-check {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
+    }
+    .checkbox-ui {
+      width: 26px;
+      height: 26px;
+      border: 2px solid #1a6fc4;
       border-radius: 6px;
-      border: 2px solid #d4c9bc;
       background: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 1px;
+      flex-shrink: 0;
       transition: all 0.15s;
     }
-    .check-box.checked { background: #4caf50; border-color: #4caf50; }
-    .check-box.checked::after { content: "✓"; color: white; font-size: 13px; font-weight: bold; }
+    .checkbox-ui.checked {
+      background: #1a6fc4;
+      border-color: #1a6fc4;
+    }
+    .checkbox-ui.checked::after {
+      content: "";
+      display: block;
+      width: 7px;
+      height: 12px;
+      border-right: 2.5px solid white;
+      border-bottom: 2.5px solid white;
+      transform: rotate(45deg) translateY(-2px);
+    }
 
-    .check-text {
+    /* テキスト部分 */
+    .row-content {
       flex: 1;
-      font-size: 0.88rem;
-      line-height: 1.5;
-      color: #444;
+      padding: 12px 8px 12px 4px;
+      min-width: 0;
     }
-    .check-text.checked { color: #aaa; text-decoration: line-through; }
-
-    .check-note {
-      font-size: 0.75rem;
-      color: #aaa;
-      margin-top: 2px;
+    .row-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: bold;
+      color: #7a5020;
+      border: 1.5px solid #c8aa78;
+      border-radius: 4px;
+      padding: 1px 6px;
+      margin-bottom: 4px;
+      background: white;
     }
-
-    .os-only { display: none; }
-    .os-only.show { display: flex; }
+    .row-text {
+      font-size: 0.9rem;
+      line-height: 1.45;
+      color: #3a2a1a;
+    }
+    .row-text.done { color: #aaa; text-decoration: line-through; }
+    .row-note {
+      font-size: 0.72rem;
+      color: #9a7a50;
+      margin-top: 3px;
+      line-height: 1.4;
+    }
 
     /* アラート */
     .step-alert {
-      background: #fff0e0;
-      border-left: 3px solid #ff9800;
+      background: #fff4e0;
+      border-left: 3px solid #e8a020;
       border-radius: 0 6px 6px 0;
-      padding: 8px 10px;
+      padding: 8px 12px;
+      margin: 0 12px 8px;
       font-size: 0.8rem;
-      color: #e65100;
-      margin-top: 10px;
+      color: #a06010;
       line-height: 1.5;
       display: none;
     }
     .step-alert.show { display: block; }
 
-    /* 完了セクション */
-    .draft-card {
-      background: white;
-      margin: 12px 16px;
-      border-radius: 12px;
-      padding: 16px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    /* 報告文エリア */
+    .draft-section {
+      margin: 14px 12px;
+      background: #fdf5e4;
+      border: 1px solid #e0c898;
+      border-radius: 10px;
+      overflow: hidden;
     }
-    .draft-heading {
-      font-size: 0.9rem;
+    .draft-header {
+      background: #7a5020;
+      color: white;
+      padding: 10px 14px;
+      font-size: 0.88rem;
       font-weight: bold;
-      margin-bottom: 10px;
       display: flex;
       align-items: center;
       gap: 6px;
     }
+    .draft-body { padding: 12px 14px; }
+    .summary-status {
+      font-size: 0.88rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      text-align: center;
+    }
+    .status-done    { background: #e8f5e9; color: #2e7d32; }
+    .status-partial { background: #fff8e1; color: #e65100; }
     textarea {
       width: 100%;
-      min-height: 220px;
-      border: 2px solid #d4c9bc;
-      border-radius: 10px;
-      padding: 12px;
+      min-height: 200px;
+      border: 1.5px solid #d4b878;
+      border-radius: 8px;
+      padding: 10px 12px;
       font-size: 0.82rem;
       line-height: 1.8;
-      color: #444;
+      color: #3a2a1a;
       resize: vertical;
-      background: #faf7f4;
+      background: white;
       font-family: inherit;
     }
-    .action-btn {
+    .btn-copy {
       display: block;
       width: 100%;
-      padding: 15px;
       margin-top: 10px;
-      border-radius: 10px;
+      padding: 14px;
+      background: #1a6fc4;
+      color: white;
       border: none;
+      border-radius: 8px;
       font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
       transition: opacity 0.2s;
     }
-    .action-btn:hover { opacity: 0.85; }
-    .btn-copy { background: #8b4513; color: white; }
-    .btn-reset { background: white; color: #888; border: 2px solid #d4c9bc; }
-
-    .summary-banner {
-      margin: 12px 16px 0;
-      padding: 12px 16px;
-      border-radius: 10px;
+    .btn-copy:hover { opacity: 0.88; }
+    .btn-reset {
+      display: block;
+      width: 100%;
+      margin-top: 8px;
+      padding: 12px;
+      background: white;
+      color: #8a6030;
+      border: 1.5px solid #c8aa78;
+      border-radius: 8px;
       font-size: 0.9rem;
-      font-weight: bold;
-      text-align: center;
+      cursor: pointer;
+      transition: background 0.15s;
     }
-    .summary-banner.all-done { background: #e8f5e9; color: #2e7d32; }
-    .summary-banner.partial { background: #fff3e0; color: #e65100; }
+    .btn-reset:hover { background: #fdf0d5; }
 
     footer {
       text-align: center;
-      font-size: 0.72rem;
-      color: #bbb;
-      padding: 24px 16px;
+      font-size: 0.7rem;
+      color: #b09060;
+      padding: 20px 16px 32px;
     }
   </style>
 </head>
@@ -283,45 +314,55 @@
 
 <header>
   <h1>クロコ インストール 完了チェック</h1>
-  <p>ステップ0〜8を順番に確認してください</p>
+  <p>ステップ1・3・5・7・8を順番に確認してください</p>
   <div class="progress-wrap">
     <div class="progress-fill" id="progressFill"></div>
   </div>
   <div class="progress-text" id="progressText">0 / 0 項目完了</div>
 </header>
 
-<div class="step-nav" id="stepNav"></div>
-
 <!-- OS選択 -->
-<div class="os-card">
-  <div class="os-label">まず確認</div>
-  <div class="os-title">パソコンの種類を選んでください</div>
+<div class="os-section">
+  <div class="os-label">▼ まずパソコンの種類を選んでください</div>
   <div class="os-btn-group">
     <button class="os-btn" id="btnMac" onclick="selectOS('mac')">Mac</button>
     <button class="os-btn" id="btnWin" onclick="selectOS('windows')">Windows</button>
   </div>
 </div>
 
+<!-- 未完了フィルター -->
+<div class="progress-summary">
+  <label class="filter-label">
+    <input type="checkbox" id="filterIncomplete" onchange="renderSteps()">
+    未完了のみ表示
+  </label>
+  <span class="remain-badge" id="remainBadge">残り — 件</span>
+</div>
+
 <div id="stepsContainer"></div>
 
-<div id="summaryBanner" class="summary-banner" style="display:none"></div>
-
-<div class="draft-card">
-  <div class="draft-heading">📋 チャットに貼り付ける報告文</div>
-  <textarea id="draftText" readonly>すべての項目にチェックを入れると、ここに報告文が表示されます。</textarea>
-  <button class="action-btn btn-copy" onclick="copyDraft()">コピーする</button>
-  <button class="action-btn btn-reset" onclick="resetAll()">リセット</button>
+<!-- 報告文 -->
+<div class="draft-section">
+  <div class="draft-header">📋 チャットに貼り付ける報告文</div>
+  <div class="draft-body">
+    <div class="summary-status status-partial" id="summaryStatus">すべての項目にチェックを入れると完了になります</div>
+    <textarea id="draftText" readonly></textarea>
+    <button class="btn-copy" onclick="copyDraft()">コピーする</button>
+    <button class="btn-reset" onclick="resetAll()">リセット</button>
+  </div>
 </div>
 
 <footer>クロコ オフ会チェックシート</footer>
 
 <script>
 let selectedOS = null;
+let checks = {};
 
 const STEPS = [
   {
     num: 1,
     title: "スクリーンショットの練習",
+    tag: "ステップ１",
     items: [
       { id: "s1_mac_area", text: "範囲選択で撮影できた（Command + Shift + 4）", osOnly: "mac" },
       { id: "s1_win_snip", text: "スニッピングツールが開いた（Windows + Shift + S）", osOnly: "windows" },
@@ -332,6 +373,7 @@ const STEPS = [
   {
     num: 3,
     title: "Git のインストール",
+    tag: "ステップ３",
     items: [
       { id: "s3_ver", text: "git --version を実行してバージョン番号が表示された", note: "例：git version 2.xx.x　／　エラーが出た場合はスタッフへ" },
     ],
@@ -340,6 +382,7 @@ const STEPS = [
   {
     num: 5,
     title: "クロコのインストールと起動",
+    tag: "ステップ５",
     items: [
       { id: "s5_mac_launch", text: "アプリケーションフォルダから「Claude」を起動できた", osOnly: "mac" },
       { id: "s5_win_start",  text: "スタートメニューに「Claude」が追加されて起動できた", osOnly: "windows" },
@@ -349,6 +392,7 @@ const STEPS = [
   {
     num: 7,
     title: "後片付け（重要！）",
+    tag: "ステップ７",
     items: [
       { id: "s7_mac_del",   text: "Claude の .dmg ファイルを削除した（ゴミ箱へ）", osOnly: "mac" },
       { id: "s7_mac_eject", text: "デスクトップの .dmg ディスクアイコンを取り出した", osOnly: "mac", note: "右クリック → 取り出す" },
@@ -358,6 +402,7 @@ const STEPS = [
   {
     num: 8,
     title: "コストと制限の理解",
+    tag: "ステップ８",
     items: [
       { id: "s8_plan",    text: "クロコの利用プランを確認した", note: "無料：1日の上限あり / Pro（$20/月）：より多く使える" },
       { id: "s8_usage",   text: "今日の残り使用量を確認する方法を覚えた" },
@@ -367,7 +412,15 @@ const STEPS = [
   },
 ];
 
-let checks = {};
+function getVisibleItems(step) {
+  return step.items.filter(item => !item.osOnly || item.osOnly === selectedOS);
+}
+
+function getStepStats(step) {
+  const items = getVisibleItems(step);
+  const done = items.filter(i => checks[i.id]).length;
+  return { done, total: items.length };
+}
 
 function selectOS(os) {
   selectedOS = os;
@@ -376,112 +429,73 @@ function selectOS(os) {
   renderSteps();
 }
 
-function getVisibleItems(step) {
-  return step.items.filter(item => {
-    if (!item.osOnly) return true;
-    return item.osOnly === selectedOS;
-  });
-}
-
-function getStepStats(step) {
-  const items = getVisibleItems(step);
-  const done = items.filter(item => checks[item.id]).length;
-  return { done, total: items.length };
-}
-
 function renderSteps() {
   const container = document.getElementById("stepsContainer");
   container.innerHTML = "";
+  const filterOnly = document.getElementById("filterIncomplete").checked;
 
-  const nav = document.getElementById("stepNav");
-  nav.innerHTML = "";
-
-  let totalDone = 0;
-  let totalAll = 0;
+  let totalDone = 0, totalAll = 0;
 
   STEPS.forEach(step => {
-    const { done, total } = getStepStats(step);
+    const items = getVisibleItems(step);
+    const done = items.filter(i => checks[i.id]).length;
     totalDone += done;
-    totalAll += total;
+    totalAll += items.length;
 
-    // ナビドット
-    const dot = document.createElement("div");
-    dot.className = "step-dot" + (done === total && total > 0 ? " done" : done > 0 ? " partial" : "");
-    dot.textContent = step.num;
-    dot.title = step.title;
-    dot.onclick = () => {
-      const el = document.getElementById("step-" + step.num);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    };
-    nav.appendChild(dot);
+    const group = document.createElement("div");
+    group.className = "step-group";
 
-    const { done: d, total: t } = getStepStats(step);
-    const allDone = d === t && t > 0;
-    const anyDone = d > 0;
-
-    const card = document.createElement("div");
-    card.className = "step-card";
-    card.id = "step-" + step.num;
-
-    const bodyId = "body-" + step.num;
-    const arrowId = "arrow-" + step.num;
-
-    const badgeClass = allDone ? "done" : anyDone ? "partial" : "";
-    const badgeText = allDone ? "✓" : anyDone ? "…" : step.num;
-    const progressClass = allDone ? "done" : anyDone ? "partial" : "";
-    const progressText = allDone ? "完了！" : anyDone ? `${d} / ${t} 項目` : `${t} 項目`;
-
-    card.innerHTML = `
-      <div class="step-header" onclick="toggleStep('${bodyId}','${arrowId}')">
-        <div class="step-badge ${badgeClass}">${badgeText}</div>
-        <div class="step-info">
-          <div class="step-num">ステップ ${step.num}</div>
-          <div class="step-title">${step.title}</div>
-          <div class="step-progress ${progressClass}">${progressText}</div>
-        </div>
-        <div class="step-arrow" id="${arrowId}">▼</div>
-      </div>
-      <div class="step-body" id="${bodyId}">
-        ${renderItems(step)}
-        ${step.alert ? `<div class="step-alert" id="alert-${step.num}">${step.alert}</div>` : ""}
-      </div>
+    // ステップヘッダー
+    const hdr = document.createElement("div");
+    hdr.className = "step-group-header";
+    hdr.innerHTML = `
+      <span class="step-group-title">ステップ ${step.num}｜${step.title}</span>
+      <span class="step-group-badge">${done}/${items.length}</span>
     `;
+    group.appendChild(hdr);
 
-    container.appendChild(card);
+    // 各チェック行
+    items.forEach(item => {
+      const isChecked = checks[item.id] || false;
+      if (filterOnly && isChecked) return;
+
+      const row = document.createElement("div");
+      row.className = "check-row" + (isChecked ? " done" : "");
+      row.onclick = () => toggleCheck(item.id);
+      row.innerHTML = `
+        <div class="row-accent">
+          <span class="accent-text">必須</span>
+        </div>
+        <div class="row-check">
+          <div class="checkbox-ui ${isChecked ? 'checked' : ''}"></div>
+        </div>
+        <div class="row-content">
+          <div class="row-tag">${step.tag}</div>
+          <div class="row-text ${isChecked ? 'done' : ''}">${item.text}</div>
+          ${item.note ? `<div class="row-note">${item.note}</div>` : ""}
+        </div>
+      `;
+      group.appendChild(row);
+    });
+
+    // アラート（途中の場合）
+    if (step.alert) {
+      const alert = document.createElement("div");
+      alert.className = "step-alert" + (done > 0 && done < items.length ? " show" : "");
+      alert.textContent = step.alert;
+      group.appendChild(alert);
+    }
+
+    container.appendChild(group);
   });
 
-  // 進捗更新
-  const pct = totalAll > 0 ? Math.round((totalDone / totalAll) * 100) : 0;
-  document.getElementById("progressFill").style.width = pct + "%";
+  // 残り件数
+  const remain = totalAll - totalDone;
+  document.getElementById("remainBadge").textContent = `残り ${remain} 件`;
+  document.getElementById("progressFill").style.width = totalAll > 0 ? (totalDone / totalAll * 100) + "%" : "0%";
   document.getElementById("progressText").textContent = `${totalDone} / ${totalAll} 項目完了`;
 
-  updateDraft();
-  updateAlerts();
-  updateSummaryBanner(totalDone, totalAll);
-}
-
-function renderItems(step) {
-  const items = getVisibleItems(step);
-  return items.map(item => {
-    const checked = checks[item.id] || false;
-    return `
-      <div class="check-item" onclick="toggleCheck('${item.id}')">
-        <div class="check-box ${checked ? 'checked' : ''}"></div>
-        <div>
-          <div class="check-text ${checked ? 'checked' : ''}">${item.text}</div>
-          ${item.note ? `<div class="check-note">${item.note}</div>` : ""}
-        </div>
-      </div>
-    `;
-  }).join("");
-}
-
-function toggleStep(bodyId, arrowId) {
-  const body = document.getElementById(bodyId);
-  const arrow = document.getElementById(arrowId);
-  const isOpen = body.classList.contains("open");
-  body.classList.toggle("open", !isOpen);
-  arrow.classList.toggle("open", !isOpen);
+  updateDraft(totalDone, totalAll);
 }
 
 function toggleCheck(id) {
@@ -489,35 +503,22 @@ function toggleCheck(id) {
   renderSteps();
 }
 
-function updateAlerts() {
-  STEPS.forEach(step => {
-    if (!step.alert) return;
-    const alertEl = document.getElementById("alert-" + step.num);
-    if (!alertEl) return;
-    const { done, total } = getStepStats(step);
-    // 1項目でもチェックしていて、まだ全部終わっていない場合にアラート表示
-    alertEl.classList.toggle("show", done > 0 && done < total);
-  });
-}
-
-function updateSummaryBanner(done, total) {
-  const banner = document.getElementById("summaryBanner");
-  if (total === 0) { banner.style.display = "none"; return; }
-  banner.style.display = "block";
-  if (done === total) {
-    banner.className = "summary-banner all-done";
-    banner.textContent = "🎉 全ステップ完了！お疲れさまでした！";
-  } else {
-    banner.className = "summary-banner partial";
-    banner.textContent = `残り ${total - done} 項目があります。スタッフに声をかけても大丈夫です！`;
-  }
-}
-
-function updateDraft() {
+function updateDraft(totalDone, totalAll) {
   const osLabel = selectedOS === "mac" ? "Mac" : selectedOS === "windows" ? "Windows" : "未選択";
+  const allDone = totalDone === totalAll && totalAll > 0;
+
+  const statusEl = document.getElementById("summaryStatus");
+  if (allDone) {
+    statusEl.className = "summary-status status-done";
+    statusEl.textContent = "🎉 全項目完了！お疲れさまでした！";
+  } else {
+    statusEl.className = "summary-status status-partial";
+    statusEl.textContent = totalAll > 0
+      ? `残り ${totalAll - totalDone} 項目があります`
+      : "すべての項目にチェックを入れると完了になります";
+  }
 
   const lines = ["【クロコ インストール完了チェック】", `OS：${osLabel}`, ""];
-
   STEPS.forEach(step => {
     const items = getVisibleItems(step);
     const done = items.filter(i => checks[i.id]).length;
@@ -525,31 +526,14 @@ function updateDraft() {
     const mark = done === total && total > 0 ? "✅" : done > 0 ? "⚠️" : "⬜";
     lines.push(`${mark} ステップ${step.num}：${step.title}（${done}/${total}）`);
   });
-
-  const totalItems = STEPS.flatMap(s => getVisibleItems(s));
-  const totalDone = totalItems.filter(i => checks[i.id]).length;
-  const total = totalItems.length;
-
   lines.push("");
-  if (totalDone === total && total > 0) {
-    lines.push("全ステップ完了しました！");
-  } else {
-    lines.push(`進捗：${totalDone} / ${total} 項目完了`);
-    const ngSteps = STEPS.filter(s => {
-      const { done, total } = getStepStats(s);
-      return done < total;
-    }).map(s => `ステップ${s.num}`);
-    if (ngSteps.length > 0) {
-      lines.push(`未完了：${ngSteps.join("、")}`);
-    }
-  }
+  lines.push(allDone ? "全ステップ完了しました！" : `進捗：${totalDone} / ${totalAll} 項目完了`);
 
   document.getElementById("draftText").value = lines.join("\n");
 }
 
 function copyDraft() {
-  const text = document.getElementById("draftText").value;
-  navigator.clipboard.writeText(text).then(() => {
+  navigator.clipboard.writeText(document.getElementById("draftText").value).then(() => {
     const btn = document.querySelector(".btn-copy");
     btn.textContent = "コピーしました！";
     setTimeout(() => { btn.textContent = "コピーする"; }, 2000);
@@ -561,11 +545,11 @@ function resetAll() {
   selectedOS = null;
   document.getElementById("btnMac").classList.remove("selected");
   document.getElementById("btnWin").classList.remove("selected");
+  document.getElementById("filterIncomplete").checked = false;
   renderSteps();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// 初期表示
 renderSteps();
 </script>
 </body>
