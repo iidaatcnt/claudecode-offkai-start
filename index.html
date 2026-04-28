@@ -364,9 +364,10 @@ const STEPS = [
     title: "スクリーンショットの練習",
     tag: "ステップ１",
     items: [
-      { id: "s1_mac_area", text: "範囲選択で撮影できた（Command + Shift + 4）", osOnly: "mac" },
-      { id: "s1_win_snip", text: "スニッピングツールが開いた（Windows + Shift + S）", osOnly: "windows" },
-      { id: "s1_paste",    text: "撮影した画像をクロコのチャット欄に貼り付けできた" },
+      { id: "s1_mac_area",  text: "範囲選択で撮影できた（Command + Shift + 4）", osOnly: "mac", note: "デスクトップにファイルとして保存される" },
+      { id: "s1_mac_clip",  text: "クリップボードに直接コピーできた（Command + Shift + Ctrl + 4）", osOnly: "mac", note: "ファイルを保存せず、そのままチャットに貼り付けられる" },
+      { id: "s1_win_snip",  text: "スニッピングツールで撮影してクリップボードにコピーできた（Windows + Shift + S）", osOnly: "windows", note: "撮影後そのままチャットに貼り付けられる（Macの Command+Shift+Ctrl+4 と同じ）" },
+      { id: "s1_paste",     text: "撮影した画像をクロコのチャット欄に貼り付けできた" },
     ],
     alert: "スクリーンショットは困ったときの命綱です。スタッフに声をかけて一緒に練習しましょう。"
   },
