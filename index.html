@@ -355,7 +355,7 @@
 <footer>クロコ オフ会チェックシート</footer>
 
 <script>
-let selectedOS = null;
+let selectedOS = "mac";
 let checks = {};
 
 const STEPS = [
@@ -542,14 +542,15 @@ function copyDraft() {
 
 function resetAll() {
   checks = {};
-  selectedOS = null;
-  document.getElementById("btnMac").classList.remove("selected");
+  selectedOS = "mac";
+  document.getElementById("btnMac").classList.add("selected");
   document.getElementById("btnWin").classList.remove("selected");
   document.getElementById("filterIncomplete").checked = false;
   renderSteps();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+document.getElementById("btnMac").classList.add("selected");
 renderSteps();
 </script>
 </body>
