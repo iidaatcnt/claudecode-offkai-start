@@ -386,7 +386,9 @@ const STEPS = [
     tag: "ステップ５",
     items: [
       { id: "s5_mac_launch", text: "アプリケーションフォルダから「Claude」を起動できた", osOnly: "mac" },
+      { id: "s5_mac_dock",   text: "DockにClaudeを追加した", osOnly: "mac", note: "Dockのアイコンを右クリック → オプション → Dockに追加" },
       { id: "s5_win_start",  text: "スタートメニューに「Claude」が追加されて起動できた", osOnly: "windows" },
+      { id: "s5_win_task",   text: "タスクバーにClaudeをピン留めした", osOnly: "windows", note: "タスクバーのアイコンを右クリック → タスクバーにピン留めする" },
     ],
     alert: "起動できない場合はスタッフに声をかけてください。"
   },
@@ -420,6 +422,16 @@ const STEPS = [
       { id: "s8_usage",   text: "今日の残り使用量を確認する方法を覚えた" },
       { id: "s8_save",    text: "節約術を覚えた", note: "長い会話は新しいチャットを始める・不要なファイルを読み込ませない" },
       { id: "s8_gakucho", text: "学長のセキュリティのおまじないをやった" },
+    ]
+  },
+  {
+    num: 9,
+    title: "おまけ：Claude in Chrome",
+    tag: "おまけ",
+    optional: true,
+    items: [
+      { id: "s9_chrome", text: "Chrome ウェブストアから「Claude」拡張機能をインストールした", note: "Chromeユーザーのみ。検索欄で「Claude」と検索してインストール" },
+      { id: "s9_login",  text: "Anthropicアカウントでログインして使える状態になった", note: "Chromeユーザーのみ" },
     ]
   },
 ];
@@ -475,8 +487,8 @@ function renderSteps() {
       row.className = "check-row" + (isChecked ? " done" : "");
       row.onclick = () => toggleCheck(item.id);
       row.innerHTML = `
-        <div class="row-accent">
-          <span class="accent-text">必須</span>
+        <div class="row-accent" style="${step.optional ? 'background:#8a8a8a;' : ''}">
+          <span class="accent-text">${step.optional ? '任意' : '必須'}</span>
         </div>
         <div class="row-check">
           <div class="checkbox-ui ${isChecked ? 'checked' : ''}"></div>
